@@ -1,0 +1,239 @@
+<html>
+<head>
+<title></title>
+
+<script type="text/javascript">
+
+function calcTotal() {
+
+	//User puts in number of items.
+	var numitems = parseInt(document.getElementById("numitems").value);
+	var discount = document.getElementById("discount").value;
+
+	//----------------------------------------------------------------------------\\
+	//Calculate cost of shipping w/o discounts or membership discount
+	
+	if(25 >= numitems >= 1) {
+	
+		var cost = numitems * 22.50;
+		var msg = "<div>Total items shipped is " + numitems + " items.</div>";
+	
+	}
+	else if(50 >= numitems >= 26) {
+	
+		var cost = numitems * 15.00;
+		var msg = "<div>Total items shipped is " + numitems + " items.</div>";
+	
+	}
+	else if(300 >= numitems >= 51) {
+	
+		var cost = numitems * 12.50;
+		var msg = "<div>Total items shipped is " + numitems + " items.</div>";
+	
+	}
+	else {
+	
+		var msg = "<div>You cannot ship this amount of items.</div>";
+	
+	}
+	//------------------------------------------------------------------------------\\
+	//User picks a discount.
+	if(discount == "discount50") {
+	
+		var discount2 = (cost * (1/2)) + cost;
+		msg = msg + "<div>Discount amount is $" + discount2 + ".</div>";
+		
+	}
+	else if(discount == "discount25") {
+	
+		var discount2 = (cost * (1/4)) + cost;
+		msg = msg + "<div>Discount amount is $" + discount2 + ".</div>";
+	
+	}
+	else {
+	
+		var discount2 = (cost * 1);
+		msg = msg + "<div>No discount selected.</div>";
+	
+	}
+	
+	//----------------------------------------------------------------------------\\
+	//If user is a member.
+	if(document.getElementById("memstat").checked == true) {
+	
+		var total = discount2 - 10;
+		msg = msg + "<div>$10.00 membership discount applied.</div>";
+		msg = msg + "<div>Total cost is $" + total + "</div>";
+	
+	}
+	else {
+	
+		var total = discount * 1;
+		msg = msg + "<div>User is not a member.</div>";
+		msg = msg + "<div>Total cost is $" + total + "</div>";
+	
+	}
+	
+	//----------------------------------------------------------------------------\\
+	//display output
+	document.getElementById("output").innerHTML = msg;
+	
+} //ends calcTotal() 
+
+
+</script>
+
+<style type="text/css">
+
+body {
+	color: black;
+	font-family: tahoma;
+	background: #F9EA99;
+	margin: 0px;
+	font-size: 90%;
+}
+
+#headerwrap {	
+	width: 100%;
+	background: #F9EA99;
+	height: 145px;
+}
+
+#header {
+	width: 800px;
+	margin: 0px auto 0px auto;
+	color: #9D2E2C;
+	background: #F9EA99;
+	height: 130px;
+	font-weight: bold;
+	font-size: 1.45em;
+	padding: 20px 0px 0px 400px;
+	background-image: url("http://newton.ncc.edu/gansonj/ite154/img/cheetah.jpg");
+	background-repeat: no-repeat;
+	background-position:50px top;
+}
+
+#toolbar {
+	width: 100%;
+	background: #9D2E2C;
+	height: 35px;
+	text-align: center;
+	color: white;
+	padding-top: 13px;
+	font-weight: bold;
+}
+
+#contentwrap {
+	width: 750px;
+	margin: 0px auto 0px auto;
+	background: #ffffff;
+	padding: 10px 0px 0px 20px;
+	height: 450px;
+	color: #4A4747;
+	border-left: 10px solid #9D2E2C;
+	border-right: 10px solid #9D2E2C;
+	background-image: url("http://newton.ncc.edu/gansonj/ite154/img/package.png");
+	background-repeat: no-repeat;
+	background-position:90% 100%;
+}
+
+#footerwrap {
+	width: 100%;
+	background: #9D2E2C;
+	height: 40px;
+	border-top: 10px solid #9D2E2C;
+}
+
+#footer {
+	color: white;
+	padding: 0px 0px 0px 20px;
+	font-weight: bold;
+}
+
+.formtext {
+	font-size: 1em;
+	margin-top: 15px;
+	color: maroon;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.formfield {
+	border: 2px #000066 solid;
+	background: lightblue;
+	width: 250px;
+	padding: 6px 0px 6px 5px;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.submit {
+	background: #F9EA99;
+	color: #9D2E2C;
+	border: 2px #9D2E2C solid;
+	border-radius: 15px;
+	font-size: 1em;
+	cursor: pointer;
+}
+
+#output {
+	font-weight: bold;
+	border-top: 6px maroon double;
+	width: 400px;
+	padding-top: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<div id="headerwrap">
+	<div id="header">
+		<div style="font-size:2em;">Cheetah Shipping Inc.</div>
+		<div>For all your shipping Needs!</div>
+	</div>
+</div>
+	
+<div id="toolbar">
+	About | Services | Store | Packing Material | Contact Us
+</div>
+
+<div id="contentwrap">
+
+	<div>
+	
+		<form>
+	
+			<div class="formtext">Enter Number of Items to Ship</div>
+			<input type="text" class="formfield" width="250" id="numitems" />
+
+			<div class="formtext">Select discount rate (if any)</div>
+			<select id="discount" class="formfield">
+				<option value="discount50">50%</option>
+				<option value="discount25">25%</option>
+				<option value="discount0">NO discount</option>
+			</select>
+			
+			<div class="formtext">Are you a cheetah club member?</div>
+			<input type="checkbox" id="memstat" ><span style="color:blue;margin-left:5px;">I am a cheetah club member</span>
+		
+			<div style="margin-top:20px;">
+				<input type="button" class="submit" value="Calculate Total" id="calcTotal()" />
+			</div>
+	
+		</form>
+		
+		<div id="output"></div>
+		
+	</div>
+
+</div> <!-- ends div#pagewrap -->
+
+<div id="footerwrap">
+	<div id="footer">
+		E-mail: bob@cheetahshipping.com
+	</div>
+</div>
+
+</body>
+</html>
